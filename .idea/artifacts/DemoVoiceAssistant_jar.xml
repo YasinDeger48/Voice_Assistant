@@ -1,0 +1,13 @@
+<component name="ArtifactManager">
+  <artifact type="jar" name="DemoVoiceAssistant:jar">
+    <output-path>$PROJECT_DIR$/out/artifacts/DemoVoiceAssistant_jar</output-path>
+    <root id="archive" name="DemoVoiceAssistant.jar">
+      <element id="directory" name="META-INF">
+        <element id="file-copy" path="$PROJECT_DIR$/META-INF/MANIFEST.MF" />
+      </element>
+      <element id="module-output" name="DemoVoiceAssistant" />
+      <element id="extracted-dir" path="$MAVEN_REPOSITORY$/de/sciss/sphinx4-data/1.0.0/sphinx4-data-1.0.0.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$MAVEN_REPOSITORY$/net/sf/phat/sphinx4-core/5prealpha/sphinx4-core-5prealpha.jar" path-in-jar="/" />
+    </root>
+  </artifact>
+</component>

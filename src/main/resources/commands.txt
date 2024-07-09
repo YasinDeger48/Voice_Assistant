@@ -1,0 +1,18 @@
+open chrome
+close chrome
+open brave
+close brave
+open recorder
+close recorder
+take full snapshot
+take snapshot
+navigate
+open Safari
+close Safari
+Open Postman
+Close Postman
+Open docker
+close docker
+onix
+hey onix
+closing onix
