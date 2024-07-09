@@ -22,9 +22,6 @@ public class VoiceAssistant {
         configuration.setDictionaryPath("resource:/dictionary/7969.dic");
         configuration.setLanguageModelPath("resource:/dictionary/7969.lm");
 
-        System.out.println(configuration.getAcousticModelPath());
-        System.out.println(configuration.getDictionaryPath());
-        //System.out.println("configuration.getLanguageModelPath() = " + configuration.getLanguageModelPath());
         try {
 
             List<String> list = new ArrayList<>(List.of("hey onix", "onix"));
