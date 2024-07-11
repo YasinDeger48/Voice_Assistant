@@ -44,60 +44,77 @@ public class VoiceAssistant {
             while ((speechResult = speechRecognizer.getResult()) != null) {
                 String voiceCommand = speechResult.getHypothesis();
                 System.out.println("voiceCommand is = " + voiceCommand);
-                boolean hey = list.stream().anyMatch(p -> p.equalsIgnoreCase(voiceCommand));
-
-                if (hey) {
-                    sleep(1);
-                    playSound("sounds/hey2.wav");
-                } else if (voiceCommand.equalsIgnoreCase("closing onix")) {
-                    System.out.println("System closed");
-                    sleep(1);
-                    playSound("sounds/byebye.wav");
-                    System.exit(1);
-                } else if (voiceCommand.equalsIgnoreCase("Open Chrome")) {
-                    String[] command = {"open", "-a", "/Applications/Google Chrome.app"};
-                    Runtime.getRuntime().exec(command);
-                } else if (voiceCommand.equalsIgnoreCase("Close Chrome")) {
-                    String[] command = {"osascript", "-e", "tell application \"Google Chrome\" to quit"};
-                    Runtime.getRuntime().exec(command);
-                } else if (voiceCommand.equalsIgnoreCase("open brave")) {
-                    String[] command = {"open", "-a", "/Applications/Brave Browser.app"};
-                    Runtime.getRuntime().exec(command);
-                } else if (voiceCommand.equalsIgnoreCase("close Brave")) {
-                    String[] command = {"osascript", "-e", "tell application \"Brave\" to quit"};
-                    Runtime.getRuntime().exec(command);
-                } else if (voiceCommand.equalsIgnoreCase("open recorder")) {
-                    String[] command = {"open", "-a", "licecap.app"};
-                    Runtime.getRuntime().exec(command);
-                } else if (voiceCommand.equalsIgnoreCase("close recorder")) {
-                    String[] command = {"osascript", "-e", "tell application \"licecap\" to quit"};
-                    Runtime.getRuntime().exec(command);
-                } else if (voiceCommand.equalsIgnoreCase("take snapshot")) {
-                    //takeScreenShot();
-                } else if (voiceCommand.equalsIgnoreCase("take full snapshot")) {
-                    //takeScreenShot();
-                } else if (voiceCommand.equalsIgnoreCase("navigate")) {
-                    //navigatingSite();
-                } else if (voiceCommand.equalsIgnoreCase("open postman")) {
-                    String[] command = {"open", "-a", "Postman.app"};
-                    Runtime.getRuntime().exec(command);
-                } else if (voiceCommand.equalsIgnoreCase("close postman")) {
-                    String[] command = {"osascript", "-e", "tell application \"Postman\" to quit"};
-                    Runtime.getRuntime().exec(command);
-                } else if (voiceCommand.equalsIgnoreCase("open safari")) {
-                    String[] command = {"open", "-a", "Safari.app"};
-                    Runtime.getRuntime().exec(command);
-                } else if (voiceCommand.equalsIgnoreCase("close safari")) {
-                    String[] command = {"osascript", "-e", "tell application \"Safari\" to quit"};
-                    Runtime.getRuntime().exec(command);
-                } else if (voiceCommand.equalsIgnoreCase("open docker")) {
-                    String[] command = {"open", "-a", "Docker.app"};
-                    Runtime.getRuntime().exec(command);
-                } else if (voiceCommand.equalsIgnoreCase("close docker")) {
-                    String[] command = {"osascript", "-e", "tell application \"Docker Desktop\" to quit"};
-                    Runtime.getRuntime().exec(command);
-                } else {
-                    System.out.println("Your voice is not recognized");
+                String finalVoiceCommand = voiceCommand;
+                boolean hey = list.stream().anyMatch(p -> p.equalsIgnoreCase(finalVoiceCommand));
+                voiceCommand = (hey) ? "true" : voiceCommand;
+                String [] command = null;
+                switch (voiceCommand.toLowerCase()) {
+                    case "true":
+                        sleep(1);
+                        playSound("sounds/hey2.wav");
+                        break;
+                    case "closing onix":
+                        System.out.println("System closed");
+                        sleep(1);
+                        playSound("sounds/byebye.wav");
+                        sleep(1);
+                        System.exit(1);
+                        break;
+                    case "open chrome":
+                        command = new String[]{"open", "-a", "/Applications/Google Chrome.app"};
+                        Runtime.getRuntime().exec(command);
+                        break;
+                    case "close chrome":
+                        command = new String[]{"osascript", "-e", "tell application \"Google Chrome\" to quit"};
+                        Runtime.getRuntime().exec(command);
+                        break;
+                    case "open brave":
+                        command = new String[]{"open", "-a", "/Applications/Brave Browser.app"};
+                        Runtime.getRuntime().exec(command);
+                        break;
+                    case "close brave":
+                        command = new String[]{"osascript", "-e", "tell application \"Brave\" to quit"};
+                        Runtime.getRuntime().exec(command);
+                        break;
+                    case "open postman":
+                        command = new String[]{"open", "-a", "Postman.app"};
+                        Runtime.getRuntime().exec(command);
+                        break;
+                    case "close postman":
+                        command = new String[]{"osascript", "-e", "tell application \"Postman\" to quit"};
+                        Runtime.getRuntime().exec(command);
+                        break;
+                    case "open docker":
+                        command = new String[]{"open", "-a", "Docker.app"};
+                        Runtime.getRuntime().exec(command);
+                        break;
+                    case "close docker":
+                        command = new String[]{"osascript", "-e", "tell application \"Docker Desktop\" to quit"};
+                        Runtime.getRuntime().exec(command);
+                        break;
+                    case "open safari":
+                        command = new String[]{"open", "-a", "Safari.app"};
+                        Runtime.getRuntime().exec(command);
+                        break;
+                    case "close safari":
+                        command = new String[]{"osascript", "-e", "tell application \"Safari\" to quit"};
+                        Runtime.getRuntime().exec(command);
+                        break;
+                    case "open recorder":
+                        command = new String[]{"open", "-a", "licecap.app"};
+                        Runtime.getRuntime().exec(command);
+                        break;
+                    case "close recorder":
+                        command = new String[]{"osascript", "-e", "tell application \"licecap\" to quit"};
+                        Runtime.getRuntime().exec(command);
+                        break;
+                    case "hey onix":
+                    case "onix":
+                        playSound("sounds/hey2.wav");
+                        break;
+                    default:
+                        System.out.println("Your voice is not recognized");
+                        break;
                 }
             }
         }catch (RuntimeException ignored){
