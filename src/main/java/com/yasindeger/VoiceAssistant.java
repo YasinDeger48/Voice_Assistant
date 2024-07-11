@@ -19,17 +19,18 @@ public class VoiceAssistant {
         Configuration configuration = new Configuration();
 
         configuration.setAcousticModelPath("resource:/edu/cmu/sphinx/models/en-us/en-us/");
+        //configuration.setAcousticModelPath("resource:/edu/cmu/sphinx/models/tr-tr/tr-tr/");
         configuration.setDictionaryPath("resource:/dictionary/7969.dic");
         configuration.setLanguageModelPath("resource:/dictionary/7969.lm");
 
         try {
 
-            List<String> list = new ArrayList<>(List.of("hey onix", "onix"));
+            List<String> list = new ArrayList<>(List.of("hey boncuk", "boncuk"));
             LiveSpeechRecognizer speechRecognizer = new LiveSpeechRecognizer(configuration);
             speechRecognizer.startRecognition(true);
 
             sleep(1);
-            playSound("sounds/hey.wav");
+            playSound("sounds/dinliyorum.wav");
             commandStacks(speechRecognizer,list);
 
         } catch (IOException e) {
@@ -51,12 +52,17 @@ public class VoiceAssistant {
                 switch (voiceCommand.toLowerCase()) {
                     case "true":
                         sleep(1);
-                        playSound("sounds/hey2.wav");
+                        playSound("sounds/efendim.wav");
+                        speechRecognizer.stopRecognition();
+                        waitSoundPlayback(2);
+                        speechRecognizer.startRecognition(true);
                         break;
-                    case "closing onix":
+                    case "close boncuk":
                         System.out.println("System closed");
                         sleep(1);
-                        playSound("sounds/byebye.wav");
+                        playSound("sounds/fikra.wav");
+                        waitSoundPlayback(24);
+                        playSound("sounds/hoscakal.wav");
                         sleep(1);
                         System.exit(1);
                         break;
@@ -108,9 +114,9 @@ public class VoiceAssistant {
                         command = new String[]{"osascript", "-e", "tell application \"licecap\" to quit"};
                         Runtime.getRuntime().exec(command);
                         break;
-                    case "hey onix":
-                    case "onix":
-                        playSound("sounds/hey2.wav");
+                    case "hey boncuk":
+                    case "boncuk":
+                        playSound("sounds/efendim.wav");
                         break;
                     default:
                         System.out.println("Your voice is not recognized");
@@ -133,10 +139,8 @@ public class VoiceAssistant {
                 throw new FileNotFoundException("File not found: " + soundFile);
             }
 
-            // BufferedInputStream ile sarmala
             BufferedInputStream bufferedInputStream = new BufferedInputStream(inputStream);
 
-            // AudioInputStream oluşturma
             AudioInputStream audioStream = AudioSystem.getAudioInputStream(bufferedInputStream);
             Clip clip = AudioSystem.getClip();
             clip.open(audioStream);
@@ -158,6 +162,13 @@ public class VoiceAssistant {
             Thread.sleep(sec * 1000);
         } catch (InterruptedException e) {
             throw new RuntimeException(e);
+        }
+    }
+    private static void waitSoundPlayback(long sec) {
+        try {
+            Thread.sleep(sec*1000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
         }
     }
 }

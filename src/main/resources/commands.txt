@@ -13,6 +13,7 @@ Open Postman
 Close Postman
 Open docker
 close docker
-onix
-hey onix
-closing onix
+boncuk
+hey boncuk
+close boncuk
+fıkra anlat
